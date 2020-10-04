@@ -1,0 +1,15 @@
+#!/bin/bash
+
+max=$1
+
+if [[ "$2" -ge "$max"  ]]
+then let max=$2
+fi
+
+if [[ "$3" -ge "$max" ]]
+then let max=$3
+fi
+ 
+echo $max
+
+exit 0
