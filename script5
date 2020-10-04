@@ -1,4 +1,0 @@
-#!/bin/bash
-
-file='/var/log/anaconda/syslog'
-awk '$2 == "INFO" {print $0}' "$file" > info.log

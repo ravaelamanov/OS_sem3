@@ -1,2 +1,0 @@
-#!/bin/bash
-man bash | tr -sc '[:alnum:]' '[\n*]' | grep -E '.+{4,}' | sort | uniq -c | sort -nr | head -n 3

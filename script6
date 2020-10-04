@@ -1,6 +1,0 @@
-#!/bin/bash
-
-file='/var/log/anaconda/X.log'
-awk '/(WW)/ {print $0}' "$file" | sed 's/(WW)/Warning:/' > full.log
-awk '/(II)/ {print $0}' "$file" | sed 's/(II)/Information:/' >> full.log
-nano full.log
