@@ -1,0 +1,15 @@
+#!/bin/bash
+ppids=$(awk -F " : " '{print $2}' out4 | uniq | awk -F '=' '{print $2}')
+for ppid in $ppids; do
+M=$(./subscript5 $ppid)
+echo $M
+line="Average_Sleeping_Children_of_ParentID=$ppid is $M"
+last=$(awk -v pat="Parent_ProcessID=$ppid " '$0~pat {print NR}' out4 | tail -n 1)
+echo $last
+old=$(sed "${last}q;d" out4)
+sed "${last}s/$old/$old\n$line\n/" out4 > test
+cat test > out4
+done
+rm test
+nano out4
+

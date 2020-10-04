@@ -1,0 +1,12 @@
+#!/bin/bash
+#echo $1
+arts=$(awk -F " : " -v pat="Parent_ProcessID=$1 :" '$0~pat {print $3}' out4 | awk -F '=' '{print $2}')
+let M=0
+let count=0
+for art in $arts; do #${arr[@]}; do
+M=$(bc<<<"scale=2;$M+$art")
+let count=$count+1
+done
+M=$(bc<<<"scale=2;$M/$count")
+echo $M
+

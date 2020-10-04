@@ -1,0 +1,3 @@
+#!/bin/bash
+top -u user -b -n 1 | sed -n '/PID/,$p' | grep 'user' | wc -l > out1
+top -u user -b -n 1 | sed -n '/PID/,$p' | grep 'user' | awk '{printf "%s:%s\n", $1, $12}' >> out1
