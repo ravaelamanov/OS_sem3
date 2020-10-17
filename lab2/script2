@@ -1,13 +1,14 @@
 #!/bin/bash
-top -b -n 1 | sed -n '8,$p' | awk '{printf "%s %s\n", $1, $12}' > temp
-while IFS= read -r pair; do
-	pid=$(echo $pair | cut -d' ' -f 1)
-	comm=$(echo $pair | cut -d' ' -f 2)
-	for file in /sbin/*; do
-		if [[ $file == "/sbin/$comm" ]]; then
-			printf "%s %s\n" $pid $comm >> out2
-			break
-		fi
-	done
-done < temp
-rm temp
+#top -b -n 1 | sed -n '8,$p' | awk '{printf "%s %s\n", $1, $12}' > temp
+#while IFS= read -r pair; do
+#	pid=$(echo $pair | cut -d' ' -f 1)
+#	comm=$(echo $pair | cut -d' ' -f 2)
+#	for file in /sbin/*; do
+#		if [[ $file == "/sbin/$comm" ]]; then
+#			printf "%s %s\n" $pid $comm >> out2
+#			break
+#		fi
+#	done
+#done < temp
+#rm temp
+ps aux | awk '$11~/^\/sbin\//{printf "%s %s\n", $2, $11}' > out2

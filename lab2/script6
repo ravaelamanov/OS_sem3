@@ -1,9 +1,10 @@
 #!/bin/bash
 top -b -o VIRT -n 1 | sed -n '/PID/,$p' | sed -n '2p' | awk '{printf "%s %s\n", $1, $5}'
+#ps aux | sed -n '2,$p'| sort -n -k 5 | tail -n 1 | awk '{printf "%s %s\n", $2, $5}'
 for pid in /proc/*; do
-if [[ $pid =~ /proc/[0-9]+ ]]; then
-awk -v pid=$pid '/VmSize/ {printf "%s %s\n", pid, $2}' "$pid/status" >> temp
-fi
+	if [[ $pid =~ /proc/[0-9]+ ]]; then
+		awk -v pid=$pid '/VmSize/ {printf "%s %s\n", pid, $2}' "$pid/status" >> temp
+	fi
 done
 sort -n -k 2 temp | tail -n 1
 rm temp

@@ -1,0 +1,2 @@
+#!/bin/bash
+ps -eo pid,ni,time | awk '$3~/00:00:.+/{print $0}' | sort -n -k 2 | head -n 3

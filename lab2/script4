@@ -1,15 +1,15 @@
 #!/bin/bash
 for pid in /proc/*; do
-if [[ $pid =~ /proc/[0-9]+ ]]; then
-ppid=$(awk '/PPid/ {print $2}' "$pid/status")
-ser=$(awk '/sum_exec_runtime/ {print $3}' "$pid/sched")
-ns=$(awk '/nr_switches/ {print $3}' "$pid/sched")
-#printf "%s %f %i\n" $pid $ser $ns >> test
-art=$(bc<<<"scale=2;$ser/$ns")
-IFS='/' read -ra ARR <<< "$pid"
-pid=${ARR[2]}
-printf "ProcessId=%s : Parent_ProcessID=%s : Average_Running_Time=%f\n" $pid $ppid $art >> temp
-fi
+	if [[ $pid =~ /proc/[0-9]+ ]]; then
+		ppid=$(awk '/PPid/ {print $2}' "$pid/status")
+		ser=$(awk '/sum_exec_runtime/ {print $3}' "$pid/sched")
+		ns=$(awk '/nr_switches/ {print $3}' "$pid/sched")
+		#printf "%s %f %i\n" $pid $ser $ns >> test
+		art=$(bc<<<"scale=2;$ser/$ns")
+		IFS='/' read -ra ARR <<< "$pid"
+		pid=${ARR[2]}
+		printf "ProcessId=%s : Parent_ProcessID=%s : Average_Running_Time=%f\n" $pid $ppid $art >> temp
+	fi
 done
 sort -k 3 -V temp > out4
 rm temp

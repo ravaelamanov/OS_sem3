@@ -1,23 +1,24 @@
 #!/bin/bash
 for i in 1 2; do
-for pid in /proc/*; do
-if [ -r "$pid/io" ]; then
-if [[ $pid =~ /proc/[0-9]+ ]]; then
-if [[ $i == "1" ]]; then
-awk -v pid=$pid '/read_bytes/ {printf "%s %s\n", pid, $2}' "$pid/io" >> temp
-fi
-if [[ $i == "2" ]]; then
-cur=$(awk -v pid=$pid '/read_bytes/ {printf "%s", $2}' "$pid/io")
-prev=$(awk -v pid="$pid " '$0~pid {printf "%s", $2}' temp)
-read_bytes=$(( cur - prev ))
-printf "%s %s\n" $pid $read_bytes >> temp1
-fi
-fi
-fi
+	for pid in /proc/*; do
+		if [ -r "$pid/io" ]; then
+			if [[ $pid =~ /proc/[0-9]+ ]]; then
+				if [[ $i == "1" ]]; then
+					awk -v pid=$pid '/read_bytes/ {printf "%s %s\n", pid, $2}' "$pid/io" >> temp
+				fi
+				if [[ $i == "2" ]]; then
+					cur=$(awk -v pid=$pid '/read_bytes/ {printf "%s", $2}' "$pid/io")
+					prev=$(awk -v pid="$pid " '$0~pid {printf "%s", $2}' temp)
+					read_bytes=$(( cur - prev ))
+					printf "%s %s\n" $pid $read_bytes >> temp1
+				fi
+			fi
+		fi
+	done
+	if [[ $i == "1" ]]; then
+		sleep 60
+	fi
 done
-if [[ $i == "1" ]]; then
-sleep 30
-fi
-done
-sort -n -k 2 temp1 | tail -n 3
-rm temp temp1
+sort -r -n -k 2 temp1 | head -n 3
+rm temp1 temp	
+
