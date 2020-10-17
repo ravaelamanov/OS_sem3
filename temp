@@ -1,0 +1,2 @@
+#!/bin/bash
+ps -eo pid,stat,time | awk '$3~/00:00:.+/ && $2 == "S"{print $0}'
