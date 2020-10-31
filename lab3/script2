@@ -1,0 +1,4 @@
+#!/bin/bash
+report=~/report
+at -f script1 now +1 minutes
+(tail -f "$report")

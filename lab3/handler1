@@ -1,0 +1,35 @@
+#!/bin/bash
+result=1
+mode="add"
+(tail -f pipe1) | 
+while true; do
+	read line
+	if [[ $line == "QUIT" ]]; then
+		echo "Stopping Handler"
+		pkill tail
+		pkill generator1
+		exit 0
+	elif [[ $line == '+' ]]; then
+		#echo add
+		mode="add"
+	elif [[ $line == '*' ]]; then
+		#echo mult
+		mode="mult"
+	elif [[ $line =~ ^[0-9]+$ ]]; then
+		#echo num
+		case $mode in
+			add)
+				let result=$result+$line
+				;;
+			mult)
+				let result=$result\*$line
+				;;
+		esac
+		echo $result
+	else
+		echo "Invalid string"
+		pkill tail
+		pkill generator1
+		exit 1
+	fi
+done

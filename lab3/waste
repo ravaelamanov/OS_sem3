@@ -1,0 +1,12 @@
+#!/bin/bash
+while true; do
+	pid=$(awk '$1~/.{4,}/{print $1;exit}' log)
+	if [[ $pid =~ .{4,} ]]; then
+		#kill -SIGTERM $(cat .pid)
+		pkill handler3
+		pkill generator3
+		echo "Wasted!" >> log
+		exit 0
+	fi
+	sleep 3
+done

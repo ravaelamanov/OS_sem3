@@ -1,0 +1,12 @@
+#!/bin/bash
+execution_time=$(date)
+newdir=$HOME/test
+report=~/report
+host="www.net_nikogo.ru"
+message1="catalog test was created successfully"
+message2="host $host unavailable"
+
+mkdir "$newdir" && { echo "$message1" >> "$report" ; touch "$newdir/$execution_time"; }
+ping "$host" || printf "%s %s\n" "$(date)" "$message2" >> "$report"
+
+

@@ -1,0 +1,15 @@
+#!/bin/bash
+echo $$ > .pid
+
+sigterm() {
+	echo "Killed using sigterm"
+	pkill tail
+	exit 0
+}
+trap 'sigterm' SIGTERM
+
+(tail -f pipe2) |
+while true; do
+	read pid
+	printf "%s rabotaet i skoro uedet v otpusk\n" $pid >> log
+done
