@@ -1,0 +1,33 @@
+#!/bin/bash
+trash_log="$HOME/.trash.log"
+trash_dir="$HOME/.trash"
+if [ ! -z $(dirname "${1}") ]; then
+	file_name=$(basename "$1")
+	echo "./untrash: provided path $1 instead of raw name. Possible fix: $file_name"
+fi
+while IFS= read -r line; do
+	IFS=" " read -ra ARR <<< "$line"
+	file_path="${ARR[0]}"
+	file_name="${file_path##*/}"
+	if [[ "$file_name" == "$1" ]]; then
+		read -e -p "Do you want to restore $file_path? (y/n): " ans < /dev/tty
+		if [[ "$ans" == "y" ]]; then
+			if  [ ! -d $(dirname "${file_path}") ]; then
+				echo "No directory path found. File will be restored to $HOME"
+				path="$HOME"
+			else
+				path=$(dirname "${file_path}")
+			fi
+
+			while [ -f "$path/$file_name" ]; do
+				printf "$path/$file_name already exists! Change the file name: "
+				read file_name < /dev/tty
+			done
+			ln "$trash_dir/${ARR[1]}" "$path/$file_name"
+			rm "$trash_dir/${ARR[1]}"
+			echo "$path/$file_name restored successfully!"
+			break;
+		fi
+	fi
+done < "$trash_log"
+

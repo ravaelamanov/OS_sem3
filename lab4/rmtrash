@@ -1,0 +1,24 @@
+#!/bin/bash
+trash=.trash
+if [ ! -f "$1" ]; then
+	echo "File $1 doesn't exist!"
+	exit 0
+fi
+
+if [ ! -d "$HOME/$trash" ]; then
+	mkdir "$HOME/$trash"
+fi
+
+if [ "$(ls -A $HOME/$trash)" ]; then
+	link_name=$(ls -A "$HOME/$trash" | wc -l)
+	let link_name="$link_name"+1
+else
+	link_name=1
+fi
+
+ln "$1" "$HOME/$trash/$link_name"
+rm "$1"
+
+printf "%s %s\n" "$PWD/$1" "$link_name" >> "$HOME/.trash.log"
+
+
