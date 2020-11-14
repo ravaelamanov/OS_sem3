@@ -1,7 +1,7 @@
 #!/bin/bash
 trash=.trash
 if [ ! -f "$1" ]; then
-	echo "File $1 doesn't exist!"
+	echo "./rmtrash: file $1 doesn't exist!"
 	exit 0
 fi
 

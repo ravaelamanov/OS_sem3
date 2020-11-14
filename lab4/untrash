@@ -4,6 +4,7 @@ trash_dir="$HOME/.trash"
 if [ ! -z $(dirname "${1}") ]; then
 	file_name=$(basename "$1")
 	echo "./untrash: provided path $1 instead of raw name. Possible fix: $file_name"
+	exit 0
 fi
 while IFS= read -r line; do
 	IFS=" " read -ra ARR <<< "$line"
