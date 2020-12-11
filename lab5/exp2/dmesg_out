@@ -1,0 +1,22 @@
+[ 1738.823515] [ 1572]  1000  1572   660380   404241  4919296   200588             0 mem.bash
+[ 1738.836569] Out of memory: Killed process 1572 (mem.bash) total-vm:2641520kB, anon-rss:1616964kB, file-rss:0kB, shmem-rss:0kB, UID:1000
+[15014.066028] [ 2262]  1000  2262   355493   224790  2490368    75136             0 mem.bash
+[15014.068023] [ 2263]  1000  2263   356120   188222  2490368   112341             0 mem2.bash
+[15014.077715] Out of memory: Killed process 2263 (mem2.bash) total-vm:1424480kB, anon-rss:752888kB, file-rss:0kB, shmem-rss:0kB, UID:1000
+[15170.694202] [ 2262]  1000  2262   647543   404973  4833280   187015             0 mem.bash
+[15170.704178] Out of memory: Killed process 2262 (mem.bash) total-vm:2590172kB, anon-rss:1619892kB, file-rss:0kB, shmem-rss:0kB, UID:1000
+[16256.352565] mem2.bash invoked oom-killer: gfp_mask=0x6200ca(GFP_HIGHUSER_MOVABLE), nodemask=(null), order=0, oom_score_adj=0
+[16256.357608] mem2.bash cpuset=/ mems_allowed=0
+[16256.359276] CPU: 0 PID: 3519 Comm: mem2.bash Kdump: loaded Tainted: G                 ---------r-  - 4.18.0-193.el8.x86_64 #1
+[16256.609402] [ 3518]  1000  3518   355790   188723  2473984   111549             0 mem.bash
+[16256.611492] [ 3519]  1000  3519   355823   225643  2478080    74604             0 mem2.bash
+[16256.619259] Out of memory: Killed process 3518 (mem.bash) total-vm:1423160kB, anon-rss:754756kB, file-rss:136kB, shmem-rss:0kB, UID:1000
+[16256.806951] oom_reaper: reaped process 3518 (mem.bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+[16754.728317] [ 3519]  1000  3519   651734   409985  4849664   186198             0 mem2.bash
+[16754.737779] Out of memory: Killed process 3519 (mem2.bash) total-vm:2606936kB, anon-rss:1639932kB, file-rss:8kB, shmem-rss:0kB, UID:1000
+[16755.184242] oom_reaper: reaped process 3519 (mem2.bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+[17973.047310] [ 4237]  1000  4237   355922   188983  2490368   111389             0 mem.bash
+[17973.055181] [ 4238]  1000  4238   355856   225664  2486272    74636             0 mem2.bash
+[17973.060984] Out of memory: Killed process 4237 (mem.bash) total-vm:1423688kB, anon-rss:755932kB, file-rss:0kB, shmem-rss:0kB, UID:1000
+[18220.130244] [ 4238]  1000  4238   650018   408351  4841472   186092             0 mem2.bash
+[18220.136039] Out of memory: Killed process 4238 (mem2.bash) total-vm:2600072kB, anon-rss:1633404kB, file-rss:0kB, shmem-rss:0kB, UID:1000

@@ -1,0 +1,2 @@
+[ 1738.823515] [ 1572]  1000  1572   660380   404241  4919296   200588             0 mem.bash
+[ 1738.836569] Out of memory: Killed process 1572 (mem.bash) total-vm:2641520kB, anon-rss:1616964kB, file-rss:0kB, shmem-rss:0kB, UID:1000

@@ -1,0 +1,15 @@
+#!/bin/bash
+pid=$(cat .pid)
+pid2=$(cat .pid2)
+while [ 1 ]; do
+	cur_time=$(ps -o etimes= -p "$$")
+	top -b -n 1 -p "$pid" -p "$pid2" > .snapshot
+	mem_stat=$(sed '4q;d' .snapshot | awk '{printf "%s %s %s %s", $4, $6, $8, $10}')
+	swap_stat=$(sed '5q;d' .snapshot | awk '{printf "%s %s %s %s", $3, $5, $7, $9}')
+	pid_stat=$(awk '/mem.bash/ {print $0}' .snapshot)
+	pid2_stat=$(awk '/mem2.bash/ {print $0}' .snapshot)
+	printf "%s %s %s\n" "$cur_time" "$mem_stat" "$swap_stat" >> exp2/mem_stat
+	printf "%s %s\n" "$cur_time" "$pid_stat" >> exp2/pid_stat
+	printf "%s %s\n" "$cur_time" "$pid2_stat" >> exp2/pid2_stat
+	sleep 10
+done

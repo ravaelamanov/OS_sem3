@@ -1,0 +1,6 @@
+#!/bin/bash
+top -b -n 1 > .test
+mem_stat=$(sed '4q;d' .test | awk '{printf "%s %s %s %s", $4, $6, $8, $10}')
+swap_stat=$(sed '5q;d' .test | awk '{printf "%s %s %s %s", $3, $5, $7, $9}')
+printf "%s %s\n" "$mem_stat" "$swap_stat" >> init_stat
+rm .test
