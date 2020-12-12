@@ -1,6 +1,6 @@
 #!/bin/bash
 N=$(cat exp1/report.log)
-let N="$N"/22
+let N="$N"/23
 echo "$N"
 for (( i = 0; i < 30; i++ )); do
 	./newmem.bash "$N" &

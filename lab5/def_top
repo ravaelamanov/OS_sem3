@@ -1,0 +1,21 @@
+#!/bin/bash
+pids=($(cat .procid) $(cat .procid1) $(cat .procid2))
+while [ 1 ]; do
+	top -b -n 1 > .snapshot
+	for pid in "${pids[@]}"
+	do
+		pid_mem=$(awk -v pid="$pid" '$1==pid {print $6}' .snapshot)
+		if [[ "$pid_mem" -ge "$1" ]]; then
+			kill -SIGTERM "$pid"
+			echo "$pid killed. Reason: exceeded memory limit. Memory limit: $1" >> .log
+		fi
+		if [ -f ".$pid" ]; then
+			let k="$pid_mem"/$(cat ".$pid")
+			if [[ "$k" -ge 2 ]]; then
+				echo "$pid potreblyaet pamyat geometricheski"
+			fi
+		fi
+		echo "$pid_mem" > ".$pid"
+	done
+	sleep 1
+done
