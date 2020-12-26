@@ -1,0 +1,2 @@
+driverquery > DRIVERS
+sort /r DRIVERS

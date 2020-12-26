@@ -1,0 +1,1 @@
+xcopy E:\1809.rar z: /Z

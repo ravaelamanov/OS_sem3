@@ -1,0 +1,5 @@
+hostname
+net use z: \\DESKTOP-15ITPF1\temp
+schtasks /create /sc once /st 21:27 /tn "MyTask" /tr C:\LAB6\script2.cmd
+taskkill /im xcopy.exe /f
+fc E:\1809.rar z:\1809.rar
