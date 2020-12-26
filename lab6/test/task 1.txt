@@ -1,0 +1,7 @@
+wmic diskdrive get model,name,size
+wmic os get FreePhysicalMemory
+wmic os get version
+getMemUsed.cmd
+xcopy c:/lab6 c:/lab6/test
+copy getMemUsed.txt+"wmic diskdrive get model,name,size.txt"+"wmic os get FreePhysicalMemory.txt"+"wmic os get version.txt" test.txt
+del (filenames) 
